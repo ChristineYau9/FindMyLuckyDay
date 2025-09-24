@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FindMyLuckyDay – Prototype</title>
+<style>
+  :root{
+    --green:#26c281; --yellow:#ffd85b; --gray:#c9c9c9; --ink:#1f2937; --ink-soft:#4b5563;
+    --bg:#ffffff; --card:#f7f7f8; --line:#e5e7eb; --brand:#0ea37a;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  }
+  body{margin:0;background:#fff;color:var(--ink)}
+  .app{max-width:420px;margin:0 auto;padding:20px}
+  header{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+  header img{width:48px;height:48px}
+  h1{font-size:28px;margin:0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:16px 0}
+  .btn{display:flex;align-items:center;gap:10px;justify-content:center;background:#efefef;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0;font-weight:700}
+  .btn.primary{background:#4b5563;color:#fff;border-color:#4b5563}
+  .subtitle{color:var(--ink-soft);font-size:14px;margin-top:-6px}
+  label{display:block;margin:10px 0 6px;font-weight:600}
+  input, select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+  .legend{display:flex;gap:18px;align-items:center;justify-content:center;margin:12px 0 4px}
+  .dot{width:10px;height:10px;border-radius:50%}
+  .row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+  .badge{min-width:64px;text-align:center;padding:8px 10px;border-radius:20px;font-weight:800;color:#1a1a1a}
+  .g{background:var(--green)}
+  .y{background:var(--yellow)}
+  .n{background:var(--gray)}
+  .desc-title{font-weight:700;margin:10px 0 6px}
+  .fine{color:var(--ink-soft);font-size:12px;line-height:1.4}
+  .grid{border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:8px 0}
+  .grid table{width:100%;border-collapse:collapse}
+  .grid td, .grid th{border:1px solid var(--line);text-align:center;padding:10px}
+  .cell{border-radius:6px;padding:6px 0}
+  .cell.g{background:var(--green)}
+  .cell.y{background:var(--yellow)}
+  .cell.n{background:var(--gray)}
+  .footer{color:var(--ink-soft);font-size:13px;margin:14px 0}
+  .hidden{display:none}
+  .icon{width:18px}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <!-- Use your green logo asset here if desired -->
+    <img alt="FindMyLuckyDay logo" src="data:image/svg+xml;utf8,
+      <svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'>
+        <circle cx='32' cy='32' r='30' fill='white' stroke='%230ea37a' stroke-width='4'/>
+        <rect x='18' y='16' width='28' height='24' rx='6' fill='%230ea37a'/>
+        <circle cx='30' cy='28' r='3' fill='white'/><circle cx='40' cy='28' r='3' fill='white'/>
+        <circle cx='30' cy='36' r='3' fill='white'/><circle cx='40' cy='36' r='3' fill='white'/>
+        <path d='M46 46c-8 6-14 6-20 0 4 1 8-1 10-3 2 1 6 1 10 3z' fill='%230ea37a'/>
+        <circle cx='50' cy='24' r='3' fill='%2326c281'/>
+      </svg>"/>
+    <h1>FindMyLuckyDay</h1>
+  </header>
+
+  <!-- SCREEN 1: INPUT -->
+  <section id="screen1" class="">
+    <p>FindMyLuckyDay empowers you to align with the universe’s most supportive energies by identifying dates that resonate with your personal goals—whether you’re seeking career breakthroughs, planning major life events, nurturing relationships, or activating wealth and mentorship opportunities.</p>
+    <div class="card">
+      <label>Date of Birth</label>
+      <input id="dob" type="date" />
+      <label>Planning Focus</label>
+      <select id="focus">
+        <option>Career</option>
+        <option>Relationship</option>
+        <option>Health/Healing</option>
+        <option>Wealth/Mentor</option>
+        <option>Major Event</option>
+        <option>Conflict Resolution</option>
+      </select>
+      <button class="btn primary" onclick="goTo('screen2')">Show My Lucky Dates</button>
+    </div>
+
+    <div class="footer">
+      <strong>Disclaimer:</strong> This tool is intended for guidance and educational purposes only. Results may vary depending on individual effort, goals, and environmental factors (e.g., Feng Shui layout). Users agree to hold the app and its creators harmless for any outcomes.
+      <br/><br/>This app is currently in the research stage. Feedback and suggestions are welcome to help improve its development. Optional consultation services are available for users seeking deeper guidance.
+    </div>
+  </section>
+
+  <!-- SCREEN 2: RECOMMENDATIONS -->
+  <section id="screen2" class="hidden">
+    <div class="card" style="padding:18px 16px">
+      <h2 style="margin:0 0 8px">Relationship</h2>
+      <div class="row"><div>Monday</div><div class="badge g">85%</div></div>
+      <div class="row"><div>May 8</div><div class="badge y">56%</div></div>
+      <div class="row"><div>May 9</div><div class="badge n">Neutral</div></div>
+      <div class="row"><div>May 11</div><div class="badge n">Neutral</div></div>
+
+      <div class="desc-title">Description</div>
+      <div>The day and year animal signs form an allied combination with your birthday pillar, signifying smoother relationship energy and fewer resistances.</div>
+
+      <div style="display:flex;gap:10px;margin-top:10px">
+        <button class="btn" onclick="toast('Thanks! Your 👍 helps us clarify explanations.')">👍 Clear</button>
+        <button class="btn" onclick="toast('Thanks! We will improve this explanation.')">👎 Unclear</button>
+        <button class="btn" onclick="goTo('screen4')">Select Other Month</button>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="dot" style="background:var(--green)"></div><span>Highly Supportive</span>
+      <div class="dot" style="background:var(--yellow)"></div><span>Moderate / Usable</span>
+      <div class="dot" style="background:var(--gray)"></div><span>Neutral</span>
+    </div>
+
+    <div class="footer">FindMyLuckyDay provides guidance based on metaphysical principles and does not guarantee specific outcomes. Users are encouraged to exercise personal judgment and conduct their own due diligence before making important decisions.</div>
+    <div class="card">
+      <button class="btn" onclick="altDates()">Find My Next Best Day</button>
+      <button class="btn" onclick="goTo('screen3')">Go to Actions & Planning</button>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: ACTIONS -->
+  <section id="screen3" class="hidden">
+    <div class="card">
+      <button class="btn" onclick="altDates()">Find My Next Best Day</button>
+      <button class="btn" onclick="toast('FAQ/Chatbot would open here.')">❓ FAQ/Chatbot</button>
+      <button class="btn" onclick="downloadICS()">📅 Add to Calendar</button>
+      <button class="btn" onclick="toast('Opening resources…')">🔗 Resources</button>
+      <button class="btn" onclick="toast('Choose 15 / 30 / 45 / 60 min…')">👤 Book a 1:1 Consultation</button>
+      <label>Feedback</label>
+      <textarea id="fb" rows="4" style="width:100%;border:1px solid var(--line);border-radius:10px"></textarea>
+    </div>
+    <div class="footer">FindMyLuckyDay provides guidance based on metaphysical principles and does not guarantee specific outcomes.</div>
+  </section>
+
+  <!-- SCREEN 4: CALENDAR -->
+  <section id="screen4" class="hidden">
+    <div style="text-align:center;font-weight:700;margin:10px 0">September 2025</div>
+    <div class="grid">
+      <table>
+        <thead><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>
+        <tbody>
+          <tr><td></td><td></td><td></td><td></td><td></td><td class="cell g">1</td><td class="cell g">2</td></tr>
+          <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td class="cell g">8</td><td>9</td></tr>
+          <tr><td>10</td><td class="cell n">11</td><td class="cell y">12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr>
+          <tr><td>17</td><td class="cell n">18</td><td>19</td><td class="cell n">20</td><td>21</td><td>22</td><td>23</td></tr>
+          <tr><td>24</td><td>25</td><td>26</td><td class="cell n">27</td><td>28</td><td>29</td><td>30</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <div class="dot" style="background:var(--green)"></div><span>Highly Supportive</span>
+      <div class="dot" style="background:var(--yellow)"></div><span>Moderate / Usable</span>
+      <div class="dot" style="background:var(--gray)"></div><span>Neutral</span>
+    </div>
+    <div class="card">
+      <button class="btn" onclick="downloadICS()">📅 Add to Calendar</button>
+      <button class="btn" onclick="toast('FAQ/Chatbot would open here.')">❓ FAQ</button>
+      <button class="btn" onclick="toast('Opening resources…')">🔗 Resources</button>
+      <button class="btn" onclick="toast('Choose 15 / 30 / 45 / 60 min…')">👤 Book a 1:1 Consultation</button>
+      <button class="btn" onclick="goTo('screen3')">Back to Actions</button>
+    </div>
+    <div class="footer">FindMyLuckyDay provides guidance based on metaphysical principles and does not guarantee specific outcomes.</div>
+  </section>
+</div>
+
+<script>
+  function goTo(id){
+    document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function toast(msg){ alert(msg); }
+  function altDates(){ alert('Next Best Dates: Sep 12 (56%), Sep 20 (Neutral), Oct 8 (85%).'); }
+
+  // simple .ics generator
+  function downloadICS(){
+    const title = "Chosen Lucky Date";
+    const start = new Date(); // today for demo
+    const end = new Date(start.getTime()+60*60*1000);
+    const pad = n => String(n).padStart(2,'0');
+    const fmt = d => d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+'00Z';
+    const ics =
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//FindMyLuckyDay//EN
+BEGIN:VEVENT
+UID:${Date.now()}@findmyluckyday
+DTSTAMP:${fmt(new Date())}
+DTSTART:${fmt(start)}
+DTEND:${fmt(end)}
+SUMMARY:FindMyLuckyDay – Lucky Date
+DESCRIPTION:Added from prototype
+END:VEVENT
+END:VCALENDAR`;
+    const blob = new Blob([ics],{type:'text/calendar;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'findmyluckyday.ics'; a.click();
+    URL.revokeObjectURL(url);
+  }
+</script>
+</body>
+</html>
